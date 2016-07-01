@@ -16,7 +16,7 @@ $(function () {
             remember(info);
 
             var passwd = generatepasswd(info);
-            $('#passwd').val(passwd).css("font-weight", "Bold");
+            $('#passwd').val(passwd).css("font-weight", "Bold").focus();
 
             $('#qrcode').empty().qrcode({
                 text: passwd,
@@ -33,6 +33,12 @@ $(function () {
 
         $('.help-trigger').on('click', function () {
             $('#help').show()[0].scrollIntoView();
+        });
+
+        var $copyBtn = $('#copyBtn');
+        var clipboard = new Clipboard($copyBtn[0]);
+        clipboard.on('success', function(){
+            window.alert("复制成功！可以粘贴密码了！");
         });
     }
 
@@ -77,3 +83,4 @@ $(function () {
         return passwd;
     }
 });
+
