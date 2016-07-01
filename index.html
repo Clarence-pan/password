@@ -1,119 +1,114 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <script>
-        // Minified version of isMobile included in the HTML since it's small
-        !function(a){var b=/iPhone/i,c=/iPod/i,d=/iPad/i,e=/(?=.*\bAndroid\b)(?=.*\bMobile\b)/i,f=/Android/i,g=/(?=.*\bAndroid\b)(?=.*\bSD4930UR\b)/i,h=/(?=.*\bAndroid\b)(?=.*\b(?:KFOT|KFTT|KFJWI|KFJWA|KFSOWI|KFTHWI|KFTHWA|KFAPWI|KFAPWA|KFARWI|KFASWI|KFSAWI|KFSAWA)\b)/i,i=/IEMobile/i,j=/(?=.*\bWindows\b)(?=.*\bARM\b)/i,k=/BlackBerry/i,l=/BB10/i,m=/Opera Mini/i,n=/(CriOS|Chrome)(?=.*\bMobile\b)/i,o=/(?=.*\bFirefox\b)(?=.*\bMobile\b)/i,p=new RegExp("(?:Nexus 7|BNTV250|Kindle Fire|Silk|GT-P1000)","i"),q=function(a,b){return a.test(b)},r=function(a){var r=a||navigator.userAgent,s=r.split("[FBAN");return"undefined"!=typeof s[1]&&(r=s[0]),s=r.split("Twitter"),"undefined"!=typeof s[1]&&(r=s[0]),this.apple={phone:q(b,r),ipod:q(c,r),tablet:!q(b,r)&&q(d,r),device:q(b,r)||q(c,r)||q(d,r)},this.amazon={phone:q(g,r),tablet:!q(g,r)&&q(h,r),device:q(g,r)||q(h,r)},this.android={phone:q(g,r)||q(e,r),tablet:!q(g,r)&&!q(e,r)&&(q(h,r)||q(f,r)),device:q(g,r)||q(h,r)||q(e,r)||q(f,r)},this.windows={phone:q(i,r),tablet:q(j,r),device:q(i,r)||q(j,r)},this.other={blackberry:q(k,r),blackberry10:q(l,r),opera:q(m,r),firefox:q(o,r),chrome:q(n,r),device:q(k,r)||q(l,r)||q(m,r)||q(o,r)||q(n,r)},this.seven_inch=q(p,r),this.any=this.apple.device||this.android.device||this.windows.device||this.other.device||this.seven_inch,this.phone=this.apple.phone||this.android.phone||this.windows.phone,this.tablet=this.apple.tablet||this.android.tablet||this.windows.tablet,"undefined"==typeof window?this:void 0},s=function(){var a=new r;return a.Class=r,a};"undefined"!=typeof module&&module.exports&&"undefined"==typeof window?module.exports=r:"undefined"!=typeof module&&module.exports&&"undefined"!=typeof window?module.exports=s():"function"==typeof define&&define.amd?define("isMobile",[],a.isMobile=s()):a.isMobile=s()}(this);
-
-        // My own arbitrary use of isMobile, as an example
-        (function () {
-            var MOBILE_SITE = 'mobile/index.html', // site to redirect to
-                NO_REDIRECT = 'noredirect'; // cookie to prevent redirect
-
-            // I only want to redirect iPhones, Android phones and a handful of 7" devices
-            if (isMobile.apple.phone || isMobile.android.phone || isMobile.seven_inch) {
-
-                // Only redirect if the user didn't previously choose
-                // to explicitly view the full site. This is validated
-                // by checking if a "noredirect" cookie exists
-                if ( document.cookie.indexOf(NO_REDIRECT) === -1 ) {
-                    document.location += MOBILE_SITE;
-                }
-            }
-        })();
-    </script>
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
-    <title>Password Generator for pezy</title>
-    <link rel="stylesheet" href="css/primer.css">
-    <link rel="stylesheet" href="octicons/octicons.css">
-    <link rel="stylesheet" href="css/password.css">
-    <link rel="shortcut icon" href="favicon.ico" />
-    <script src="js/jquery-3.0.0.min.js"></script>
-    <script src="js/clipboard.min.js"></script>
-    <script src="js/sha.js"></script>
-    <script src="js/jquery.qrcode.min.js"></script>
-    <script>
-        $(document).ready(function(){
-            $('#showPassword').click(function() {
-                var info = new Object();
-                info.id = $('#ID').val().trim();
-                info.app = $('#APP').val().toLowerCase().trim();
-                var infoText = JSON.stringify(info);
-                var key = $('#KEY').val();
-                var hmacObj = new jsSHA('SHA-1', 'TEXT');
-                hmacObj.setHMACKey(key, 'TEXT');
-                hmacObj.update(infoText);
-                var password = hmacObj.getHMAC('B64').substring(0, 8);
-                $('#password').val(password).css("font-weight","Bold");
-                $('#qrcode').qrcode({
-                    text: password,
-                    width: 120,
-                    height: 120
-                });
-            });
-
-            $("#KEY").keydown(function(event){
-                if(event.keyCode==32||event.keyCode==13||event.keyCode==188||event.keyCode==186){
-                    $("#showPassword").click();
-                }
-            });
-        });
-    </script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" id="viewport"
+          content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="HandheldFriendly" content="true">
+    <meta name="MobileOptimized" content="width">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="applicable-device" content="mobile">
+    <meta name="format-detection" content="telephone=no">
+    <title>密码生成器</title>
+    <link rel="stylesheet" href="css/primer.min.css">
+    <link rel="stylesheet" href="octicons/octicons.min.css">
+    <link rel="stylesheet" href="css/passwd.min.css">
+    <link rel="shortcut icon" href="favicon.ico"/>
 </head>
-
 <body>
-    <div class="password-header">
-        <div class="header-logo">
-            <svg aria-hidden="true" class="octicon octicon-key" height="48" version="1.1" viewBox="0 0 16 16" width="48">
-                <path d="M12.83,2.17 C12.08,1.42 11.14,1.03 10,1 C8.87,1.03 7.92,1.42 7.17,2.17 C6.42,2.92 6.04,3.86 6.01,5 C6.01,5.3 6.04,5.59 6.1,5.89 L0,12 L0,13 L1,14 L3,14 L4,13 L4,12 L5,12 L5,11 L6,11 L6,10 L8,10 L9.09,8.89 C9.39,8.97 9.68,9 10,9 C11.14,8.97 12.08,8.58 12.83,7.83 C13.58,7.08 13.97,6.14 14,5 C13.97,3.86 13.58,2.92 12.83,2.17 L12.83,2.17 Z M11,5.38 C10.23,5.38 9.62,4.77 9.62,4 C9.62,3.23 10.23,2.62 11,2.62 C11.77,2.62 12.38,3.23 12.38,4 C12.38,4.77 11.77,5.38 11,5.38 L11,5.38 Z"></path>
-            </svg>
-        </div>
-    </div>
-    <div class="password-form">
-        <div class="password-form-header">
-            <h1>Password Generator</h1>
-        </div>
-        <div class="password-form-body">
-            <dl class="form-group">
-                <label>Username</label>
-                <input id="ID" class="form-control input-block" type="email" placeholder="username/email">
-            </dl>
-            <dl class="form-group">
-                <label>Website</label>
-                <input id="APP" class="form-control input-block" type="text" placeholder="website/app">
-            </dl>
-            <dl class="form-group">
-                <label>1Password</label>
-                <input id="KEY" class="form-control input-block" type="password" placeholder="1password">
-            </dl>
-            <dl class="form-group">
-                <div class="form-actions">
-                    <button id="showPassword" type="button" class="btn btn-primary btn-block">Generate</button>
-                </div>
-            </dl>
-            <div class="input-group">
-                <input id="password" class="form-control" type="text" placeholder="password" readonly>
-                <span class="input-group-button">
-                    <button id="copy" class="btn" data-clipboard-target="#password">
-                        <span class="octicon octicon-clippy"></span>
-                </button>
-                </span>
-                <script>
-                    var copyAction = document.getElementById('copy');
-                    var clipboard = new Clipboard(copyAction);
-
-                    clipboard.on('success', function(e) {
-                        console.log(e);
-                    });
-                </script>
+<div class="passwd-form">
+    <div class="passwd-form-header">
+        <h1>
+            <div class="logo">
+                <svg aria-hidden="true" class="octicon octicon-key" height="48" version="1.1" viewBox="0 0 16 16"
+                     width="48">
+                    <path d="M12.83,2.17 C12.08,1.42 11.14,1.03 10,1 C8.87,1.03 7.92,1.42 7.17,2.17 C6.42,2.92 6.04,3.86 6.01,5 C6.01,5.3 6.04,5.59 6.1,5.89 L0,12 L0,13 L1,14 L3,14 L4,13 L4,12 L5,12 L5,11 L6,11 L6,10 L8,10 L9.09,8.89 C9.39,8.97 9.68,9 10,9 C11.14,8.97 12.08,8.58 12.83,7.83 C13.58,7.08 13.97,6.14 14,5 C13.97,3.86 13.58,2.92 12.83,2.17 L12.83,2.17 Z M11,5.38 C10.23,5.38 9.62,4.77 9.62,4 C9.62,3.23 10.23,2.62 11,2.62 C11.77,2.62 12.38,3.23 12.38,4 C12.38,4.77 11.77,5.38 11,5.38 L11,5.38 Z"></path>
+                </svg>
             </div>
-            <dl class="form-group">
-                <div id="qrcode"></div>
-            </dl>
+            密码生成器
+            <a class="help-trigger" href="#help"><i class="octicon octicon-question"></i></a>
+        </h1>
+    </div>
+    <div class="passwd-form-body">
+        <div class="input-group">
+            <label for="ID">用户名:</label>
+            <input id="ID" class="form-control" type="text" placeholder="用户名/手机号/E-Mail"/>
+        </div>
+        <div class="input-group">
+            <label for="APP">网站/APP:</label>
+            <input id="APP" class="form-control" type="text" placeholder="网站或APP的名称"/>
+        </div>
+        <div class="input-group">
+            <label for="KEY">密钥:</label>
+            <input id="KEY" class="form-control" type="password" placeholder="不能告诉别人的秘密">
+        </div>
+        <div class="form-group">
+            <input id="LENGTH" class="form-control " type="number" value="12"/>
+            <select id="TYPE" class="">
+                <option value="abcdefghijklmnopqrstuvwxyz0123456789">a-z0-9</option>
+                <option value="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789">a-zA-Z0-9</option>
+                <option value="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.+!@_-"
+                        selected="selected">a-zA-Z0-9.+!@_-
+                </option>
+                <option value="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789~`!@#$%^&*()_+-={}[]|\:;',./<>?">
+                    a-zA-Z0-9...
+                </option>
+            </select>
+            <button id="generateBtn" type="button" class="btn btn-primary btn-block">生成</button>
+        </div>
+        <div class="form-group">
+            <div class="form-actions">
+            </div>
+        </div>
+        <div class="input-group">
+            <input id="passwd" class="form-control" type="text" placeholder="生成的密码" readonly>
+            <span class="input-group-button">
+                <button id="copyBtn" class="btn" data-clipboard-target="#passwd">
+                    <span class="octicon octicon-clippy"></span>
+                </button>
+            </span>
+        </div>
+        <div>
+            <div id="qrcode"></div>
         </div>
     </div>
+    <div id="help" style="display: none">
+        <h3><i class="octicon octicon-question"></i> 如何使用？</h3>
+        <p>
+            这个是一个密码生成器，用于生成密码。<br/>
+            根据提示，输入您的用户名、网站/APP的名称和您的密钥（秘密代码），然后点击【生成】按钮，
+            它将通过SHA-512将你输入的用户名、网站/APP的名称和密钥等信息进行HASH生成出一个足够复杂的密码。<br/>
+            你可以放心地将这个密码用在对应的网站上。
+        </p>
+
+        <h3><i class="octicon octicon-question"></i> 我需要记住生成的密码吗？</h3>
+        <p>
+            你不需要记住生成的密码 —— 你只需要记住你的“密钥”就可以了 —— 一定要注意，不要泄漏你的“密钥”给任何人。<br/>
+            当然，你的用户名、对应的网站/APP名称、密码的长度和字典也都需要记住 —— 相信这些东东一定比密码好记多了。
+        </p>
+
+        <h3><i class="octicon octicon-question"></i> 你这个网站安全吗？会不会偷偷记录我的密码？</h3>
+        <p>
+            你放心，本网站绝不会记录你的密码。<br/>
+            此页面属于静态页面，所有的计算都在你的浏览器上完成，不会传输你的用户名和密码等个人信息到服务器。<br/>
+            如果你还不放心，尽可以到此工具的开源代码库去审查对应的代码：<a href="https://github.com/Clarence-pan/password">github.com/Clarence-pan/password</a>.
+        </p>
+    </div>
+</div>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/clipboard.min.js"></script>
+<script src="js/sha512.js"></script>
+<script src="js/jquery.qrcode.min.js"></script>
+<script src="js/passwd.min.js"></script>
+<script>
+    (function () {
+        var clipboard = new Clipboard(document.getElementById('copyBtn'));
+    })();
+</script>
 </body>
 
 </html>
