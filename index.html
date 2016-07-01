@@ -6,17 +6,19 @@
     <meta name="renderer" content="webkit">
     <meta name="viewport" id="viewport"
           content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="HandheldFriendly" content="true">
-    <meta name="MobileOptimized" content="width">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="applicable-device" content="mobile">
-    <meta name="format-detection" content="telephone=no">
     <title>密码生成器</title>
     <link rel="stylesheet" href="css/primer.min.css">
     <link rel="stylesheet" href="octicons/octicons.min.css">
     <link rel="stylesheet" href="css/passwd.min.css">
     <link rel="shortcut icon" href="favicon.ico"/>
+    <meta name="HandheldFriendly" content="true">
+    <meta name="MobileOptimized" content="width">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="white">
+    <meta name="applicable-device" content="mobile">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="apple-touch-icon" sizes="72x72" href="favicon-72x72.png?v2">
+    <link rel="apple-touch-icon" sizes="114x114" href="favicon-114x114.png?v2">
 </head>
 <body>
 <div class="passwd-form">
@@ -48,13 +50,11 @@
         <div class="form-group">
             <input id="LENGTH" class="form-control " type="number" value="12"/>
             <select id="TYPE" class="">
-                <option value="abcdefghijklmnopqrstuvwxyz0123456789">a-z0-9</option>
-                <option value="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789" selected="selected" >a-zA-Z0-9</option>
-                <option value="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.+!@_-" >a-zA-Z0-9.+!@_-
-                </option>
-                <option value="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789~`!@#$%^&*()_+-={}[]|\:;',./<>?">
-                    a-zA-Z0-9...
-                </option>
+                <option value="0123456789">纯数字</option>
+                <option value="abcdefghijklmnopqrstuvwxyz0123456789">小写字母+数字</option>
+                <option value="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789" selected="selected" >字母+数字</option>
+                <option value="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.+!@_-" >字母+数字+符号</option>
+                <option value="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789~`!@#$%^&*()_+-={}[]|\:;',./<>?">所有可打印字符</option>
             </select>
             <button id="generateBtn" type="button" class="btn btn-primary btn-block">生成</button>
         </div>
